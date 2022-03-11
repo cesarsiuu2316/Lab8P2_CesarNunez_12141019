@@ -1,13 +1,11 @@
 package lab8p2_cesarnunez_12141019;
 
 import java.awt.Color;
-import java.util.Random;
 
 public class Auto {
     
     private int numIdentificador, distanciaRecorrida, nombreCorredor;
     private Color color;
-    private Random rand = new Random();
 
     public Auto() {
     }
