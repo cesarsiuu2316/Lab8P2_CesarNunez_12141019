@@ -19,6 +19,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         this.setLocationRelativeTo(null);
         tiposCarroCB();
         jb_color.setBackground(color);
+        AdministrarAuto aa = new AdministrarAuto(path);
+        aa.cargarArchivo();
+        aniadirCarroAlCB();
     }
     
     private void tiposCarroCB(){
@@ -206,7 +209,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 JOptionPane.showMessageDialog(null, "El número identificador ya está asignado a otro carro.");
             }else{
                 JOptionPane.showMessageDialog(null, "Debe completar los campos!");
-            }
+            }            
+            // se agregó con éxito
+            aniadirCarroAlCB();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error, ingrese un número identificador válido!");
         }       
@@ -233,6 +238,17 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             }
         }
         return yaEsta;
+    }
+    
+    private void aniadirCarroAlCB(){
+        AdministrarAuto aa = new AdministrarAuto(path);
+        aa.cargarArchivo();
+        ArrayList<Auto> autos = aa.getAutos();
+        DefaultComboBoxModel m = (DefaultComboBoxModel) jcb_carro.getModel();
+        for (Auto auto : autos) {
+            m.addElement(auto);
+        }
+        jcb_carro.setModel(m);
     }
     
     public static void main(String args[]) {
