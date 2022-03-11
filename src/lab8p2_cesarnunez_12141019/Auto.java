@@ -4,15 +4,15 @@ import java.awt.Color;
 
 public class Auto {
     
-    private int numIdentificador, distanciaRecorrida, nombreCorredor;
+    private int numIdentificador, distanciaRecorrida = 0;
+    private String nombreCorredor;
     private Color color;
 
     public Auto() {
     }
 
-    public Auto(int numIdentificador, int distanciaRecorrida, int nombreCorredor, Color color) {
+    public Auto(int numIdentificador, String nombreCorredor, Color color) {
         this.numIdentificador = numIdentificador;
-        this.distanciaRecorrida = distanciaRecorrida;
         this.nombreCorredor = nombreCorredor;
         this.color = color;
     }
@@ -33,11 +33,11 @@ public class Auto {
         this.distanciaRecorrida = distanciaRecorrida;
     }
 
-    public int getNombreCorredor() {
+    public String getNombreCorredor() {
         return nombreCorredor;
     }
 
-    public void setNombreCorredor(int nombreCorredor) {
+    public void setNombreCorredor(String nombreCorredor) {
         this.nombreCorredor = nombreCorredor;
     }
 

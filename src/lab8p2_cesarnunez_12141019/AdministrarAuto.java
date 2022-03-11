@@ -7,9 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class AdministrarAuto {
+public class AdministrarAuto implements Serializable{
     
     private ArrayList<Auto> autos = new ArrayList();
     File file = null;
@@ -42,30 +45,26 @@ public class AdministrarAuto {
     }
     
     public void cargarArchivo(){
-        FileInputStream fi = null;
-        ObjectInputStream oi = null;
         try{
-            if(file.exists()){
-                autos = new ArrayList();
-                Auto a;
-                fi = new FileInputStream(file);
-                oi = new ObjectInputStream(fi);
+            autos = new ArrayList();
+            Auto a;
+            if(file.exists()){                
+                FileInputStream fi = new FileInputStream(file);
+                ObjectInputStream oi = new ObjectInputStream(fi);
                 try{
-                    while((a = (Auto) oi.readObject()) != null){
-                        autos.add(a);
+                    while(true){
+                        autos.add(((Auto) oi.readObject()));
                     }
                 }catch(EOFException e){
-                    e.printStackTrace();
+                    // e.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(AdministrarAuto.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                oi.close();
+                fi.close();            
             }
         }catch(IOException io){
             io.printStackTrace();
-        }
-        try{
-            oi.close();
-            fi.close();
-        }catch(Exception e){
-            
         }
     }
     

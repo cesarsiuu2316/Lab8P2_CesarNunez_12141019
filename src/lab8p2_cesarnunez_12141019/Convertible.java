@@ -13,8 +13,8 @@ public class Convertible extends Auto {
         super();
     }
 
-    public Convertible(int numIdentificador, int distanciaRecorrida, int nombreCorredor, Color color) {
-        super(numIdentificador, distanciaRecorrida, nombreCorredor, color);
+    public Convertible(int numIdentificador, String nombreCorredor, Color color) {
+        super(numIdentificador, nombreCorredor, color);
     }
 
     @Override

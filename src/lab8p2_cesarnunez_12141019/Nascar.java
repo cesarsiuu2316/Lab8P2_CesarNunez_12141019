@@ -12,8 +12,8 @@ public class Nascar extends Auto{
         super();
     }
 
-    public Nascar(int numIdentificador, int distanciaRecorrida, int nombreCorredor, Color color) {
-        super(numIdentificador, distanciaRecorrida, nombreCorredor, color);
+    public Nascar(int numIdentificador, String nombreCorredor, Color color) {
+        super(numIdentificador, nombreCorredor, color);
     }
 
     @Override

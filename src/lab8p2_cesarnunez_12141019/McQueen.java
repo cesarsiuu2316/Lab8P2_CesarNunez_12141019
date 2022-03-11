@@ -13,8 +13,8 @@ public class McQueen extends Auto{
         super();
     }
 
-    public McQueen(int numIdentificador, int distanciaRecorrida, int nombreCorredor, Color color) {
-        super(numIdentificador, distanciaRecorrida, nombreCorredor, color);
+    public McQueen(int numIdentificador, String nombreCorredor, Color color) {
+        super(numIdentificador, nombreCorredor, color);
     }
 
     @Override
