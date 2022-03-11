@@ -16,6 +16,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,18 +28,114 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jb_comenzar = new javax.swing.JButton();
+        jb_pausar = new javax.swing.JButton();
+        jl_largo = new javax.swing.JLabel();
+        jl_pista = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jt_carrera = new javax.swing.JTable();
+        jcb_carro = new javax.swing.JComboBox<>();
+        jb_agregar = new javax.swing.JButton();
+        jl_numeroIdentificador = new javax.swing.JLabel();
+        jl_numeroIdentificador1 = new javax.swing.JLabel();
+        jtf_numIdentificador = new javax.swing.JTextField();
+        jtf_numIdentificador1 = new javax.swing.JTextField();
+        jcb_tipoCarro = new javax.swing.JComboBox<>();
+        jb_color = new javax.swing.JButton();
+        jb_guardarCarro = new javax.swing.JButton();
+        jl_numeroIdentificador2 = new javax.swing.JLabel();
+        jtf_nombrePista = new javax.swing.JTextField();
+        jl_numeroIdentificador3 = new javax.swing.JLabel();
+        jtf_largo = new javax.swing.JTextField();
+        jb_usarPista = new javax.swing.JButton();
+        jb_guardarPista = new javax.swing.JButton();
+        jl_background = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jb_comenzar.setText("Comenzar");
+        getContentPane().add(jb_comenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 40));
+
+        jb_pausar.setText("Pausar");
+        getContentPane().add(jb_pausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 170, 40));
+
+        jl_largo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jl_largo.setText("Largo: ______");
+        getContentPane().add(jl_largo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, -1, -1));
+
+        jl_pista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jl_pista.setText("Pista: ______");
+        getContentPane().add(jl_pista, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, -1, -1));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 880, 90));
+
+        jt_carrera.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jt_carrera.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador", "Corredor", "Distancia"
+            }
+        ));
+        jScrollPane1.setViewportView(jt_carrera);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 880, 240));
+
+        jcb_carro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(jcb_carro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 230, 40));
+
+        jb_agregar.setText("Agregar");
+        getContentPane().add(jb_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 170, 40));
+
+        jl_numeroIdentificador.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jl_numeroIdentificador.setText("Nombre Corredor");
+        getContentPane().add(jl_numeroIdentificador, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, -1, -1));
+
+        jl_numeroIdentificador1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jl_numeroIdentificador1.setText("Número Identificador");
+        getContentPane().add(jl_numeroIdentificador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
+
+        jtf_numIdentificador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(jtf_numIdentificador, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 230, 40));
+
+        jtf_numIdentificador1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(jtf_numIdentificador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 260, 40));
+
+        jcb_tipoCarro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(jcb_tipoCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 180, 40));
+
+        jb_color.setText("Color");
+        getContentPane().add(jb_color, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 630, 220, 40));
+
+        jb_guardarCarro.setText("Guardar");
+        getContentPane().add(jb_guardarCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 220, 40));
+
+        jl_numeroIdentificador2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jl_numeroIdentificador2.setText("Nombre Pista");
+        getContentPane().add(jl_numeroIdentificador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, -1));
+
+        jtf_nombrePista.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(jtf_nombrePista, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 450, 230, 40));
+
+        jl_numeroIdentificador3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jl_numeroIdentificador3.setText("Largo");
+        getContentPane().add(jl_numeroIdentificador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 520, -1, -1));
+
+        jtf_largo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(jtf_largo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, 230, 40));
+
+        jb_usarPista.setText("Color");
+        getContentPane().add(jb_usarPista, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 570, 220, 40));
+
+        jb_guardarPista.setText("Guardar");
+        getContentPane().add(jb_guardarPista, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, 220, 40));
+
+        jl_background.setBackground(new java.awt.Color(204, 204, 204));
+        jl_background.setOpaque(true);
+        getContentPane().add(jl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -54,7 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -79,5 +176,28 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jb_agregar;
+    private javax.swing.JButton jb_color;
+    private javax.swing.JButton jb_comenzar;
+    private javax.swing.JButton jb_guardarCarro;
+    private javax.swing.JButton jb_guardarPista;
+    private javax.swing.JButton jb_pausar;
+    private javax.swing.JButton jb_usarPista;
+    private javax.swing.JComboBox<String> jcb_carro;
+    private javax.swing.JComboBox<String> jcb_tipoCarro;
+    private javax.swing.JLabel jl_background;
+    private javax.swing.JLabel jl_largo;
+    private javax.swing.JLabel jl_numeroIdentificador;
+    private javax.swing.JLabel jl_numeroIdentificador1;
+    private javax.swing.JLabel jl_numeroIdentificador2;
+    private javax.swing.JLabel jl_numeroIdentificador3;
+    private javax.swing.JLabel jl_pista;
+    private javax.swing.JTable jt_carrera;
+    private javax.swing.JTextField jtf_largo;
+    private javax.swing.JTextField jtf_nombrePista;
+    private javax.swing.JTextField jtf_numIdentificador;
+    private javax.swing.JTextField jtf_numIdentificador1;
     // End of variables declaration//GEN-END:variables
 }
