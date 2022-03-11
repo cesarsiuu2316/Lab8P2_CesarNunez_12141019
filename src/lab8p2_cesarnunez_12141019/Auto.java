@@ -1,10 +1,11 @@
 package lab8p2_cesarnunez_12141019;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public class Auto {
+public abstract class Auto implements Serializable{
     
-    private int numIdentificador, distanciaRecorrida = 0;
+    private int numIdentificador = 0, distanciaRecorrida = 0;
     private String nombreCorredor;
     private Color color;
 
@@ -49,8 +50,13 @@ public class Auto {
         this.color = color;
     }
     
-    public int distanciaAleatoria(){
-        return 0;        
+    public abstract int distanciaAleatoria();
+
+    @Override
+    public String toString() {
+        return "" + numIdentificador;
     }
+    
+    
         
 }

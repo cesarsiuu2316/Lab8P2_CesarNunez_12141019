@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class MainFrame extends javax.swing.JFrame implements Serializable{
@@ -66,6 +67,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jb_comenzar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jb_comenzar.setText("Comenzar");
+        jb_comenzar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_comenzarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jb_comenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 40));
 
         jb_pausar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -99,6 +105,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jb_agregar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jb_agregar.setText("Agregar");
+        jb_agregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_agregarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jb_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 170, 40));
 
         jl_numeroIdentificador.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -193,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         try{
             if(jtf_numIdentificador.getText().equals("") == false && jtf_nombreCorredor.getText().equals("") == false && numeroRepetido(Integer.parseInt(jtf_numIdentificador.getText())) == false){
                 int n = Integer.parseInt(jtf_numIdentificador.getText());
-                Auto a = new Auto();
+                Auto a = null;
                 if( ((String) jcb_tipoCarro.getSelectedItem()).equals("McQueen") ){
                     a = new McQueen(n, jtf_nombreCorredor.getText(), color);                                       
                 }else if( ((String) jcb_tipoCarro.getSelectedItem()).equals("Convertible") ){
@@ -205,6 +216,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 aa.cargarArchivo();
                 aa.setAuto(a);
                 aa.escribirArchivo();
+                JOptionPane.showMessageDialog(null, "Se ha creado el auto exitósamente!");
             }else if(jtf_numIdentificador.getText().equals("") == false && jtf_nombreCorredor.getText().equals("") == false && numeroRepetido(Integer.parseInt(jtf_numIdentificador.getText()))){
                 JOptionPane.showMessageDialog(null, "El número identificador ya está asignado a otro carro.");
             }else{
@@ -226,6 +238,37 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jb_color.setBackground(c);
     }//GEN-LAST:event_jb_colorMouseClicked
 
+    private void jb_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarMouseClicked
+        if(jcb_carro.getSelectedIndex() >= 0){
+            Auto a = (Auto) jcb_carro.getSelectedItem();
+            if(yaEstaAgregado(a) == false){
+                DefaultTableModel m = (DefaultTableModel) jt_carrera.getModel();
+                Object[] newRow = {
+                    a.getNumIdentificador(), a.getNombreCorredor(), a.getDistanciaRecorrida()
+                };
+                m.addRow(newRow);
+                jt_carrera.setModel(m);
+            }else{
+                JOptionPane.showMessageDialog(null, "El auto ya está agregado en la carrera.");
+            }
+        }                
+    }//GEN-LAST:event_jb_agregarMouseClicked
+
+    private boolean yaEstaAgregado(Auto a){
+        DefaultTableModel m = (DefaultTableModel) jt_carrera.getModel();
+        for (int i = 0; i < m.getRowCount(); i++) {
+            int x = (Integer) m.getValueAt(i, 0);
+            if(x == a.getNumIdentificador()){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void jb_comenzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_comenzarMouseClicked
+        
+    }//GEN-LAST:event_jb_comenzarMouseClicked
+
     private boolean numeroRepetido(int n){
         AdministrarAuto aa = new AdministrarAuto(path);
         aa.cargarArchivo();
@@ -244,11 +287,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         AdministrarAuto aa = new AdministrarAuto(path);
         aa.cargarArchivo();
         ArrayList<Auto> autos = aa.getAutos();
-        DefaultComboBoxModel m = (DefaultComboBoxModel) jcb_carro.getModel();
+        DefaultComboBoxModel n = new DefaultComboBoxModel();
         for (Auto auto : autos) {
-            m.addElement(auto);
+            n.addElement(auto);
         }
-        jcb_carro.setModel(m);
+        jcb_carro.setModel(n);
     }
     
     public static void main(String args[]) {
