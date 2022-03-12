@@ -14,6 +14,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
     private Color color = Color.red;
     private String path = "./listaAutos.auto";
+    Thread hilo;
+    private boolean hayPista = false;
+    private ArrayList<Auto> autos = new ArrayList();
     
     public MainFrame() {
         initComponents();
@@ -41,7 +44,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jb_pausar = new javax.swing.JButton();
         jl_largo = new javax.swing.JLabel();
         jl_pista = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        jpb_carrera = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_carrera = new javax.swing.JTable();
         jcb_carro = new javax.swing.JComboBox<>();
@@ -85,7 +88,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jl_pista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jl_pista.setText("Pista: ______");
         getContentPane().add(jl_pista, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, -1, -1));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 880, 90));
+        getContentPane().add(jpb_carrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 880, 90));
 
         jt_carrera.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jt_carrera.setModel(new javax.swing.table.DefaultTableModel(
@@ -189,12 +192,20 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 largo = Integer.parseInt(jtf_largo.getText());
                 jl_largo.setText("Largo: " + largo);
                 jl_pista.setText("Pista: " + jtf_nombrePista.getText());
+                jpb_carrera.setMaximum(largo);
                 JOptionPane.showMessageDialog(null, "Se ha creado la pista exitósamente!");
+                hayPista = true;
             }else{
                 JOptionPane.showMessageDialog(null, "Debe completar los campos!");
+                hayPista = false;
+                jl_largo.setText("Largo: ______");
+                jl_pista.setText("Pista: ______");
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error, ingrese un largo válido!");
+            hayPista = false;
+            jl_largo.setText("Largo: ______");
+            jl_pista.setText("Pista: ______");
         }
         jtf_largo.setText("");
         jtf_nombrePista.setText("");
@@ -239,19 +250,24 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_jb_colorMouseClicked
 
     private void jb_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarMouseClicked
-        if(jcb_carro.getSelectedIndex() >= 0){
-            Auto a = (Auto) jcb_carro.getSelectedItem();
-            if(yaEstaAgregado(a) == false){
-                DefaultTableModel m = (DefaultTableModel) jt_carrera.getModel();
-                Object[] newRow = {
-                    a.getNumIdentificador(), a.getNombreCorredor(), a.getDistanciaRecorrida()
-                };
-                m.addRow(newRow);
-                jt_carrera.setModel(m);
-            }else{
-                JOptionPane.showMessageDialog(null, "El auto ya está agregado en la carrera.");
-            }
-        }                
+        if(hayPista){
+            if(jcb_carro.getSelectedIndex() >= 0){
+                Auto a = (Auto) jcb_carro.getSelectedItem();
+                if(yaEstaAgregado(a) == false){
+                    DefaultTableModel m = (DefaultTableModel) jt_carrera.getModel();
+                    Object[] newRow = {
+                        a.getNumIdentificador(), a.getNombreCorredor(), a.getDistanciaRecorrida()
+                    };
+                    m.addRow(newRow);
+                    jt_carrera.setModel(m);
+                    autos.add(a);
+                }else{
+                    JOptionPane.showMessageDialog(null, "El auto ya está agregado en la carrera.");
+                }
+            }                
+        }else{
+            JOptionPane.showMessageDialog(null, "Error: primero debe agregar una pista");
+        }        
     }//GEN-LAST:event_jb_agregarMouseClicked
 
     private boolean yaEstaAgregado(Auto a){
@@ -266,9 +282,12 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     }
     
     private void jb_comenzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_comenzarMouseClicked
-        
+        AdministrarTabla at = new AdministrarTabla(jt_carrera, jpb_carrera, autos);
+        hilo = new Thread(at);
+        at.getBarra().setValue(0);
+        hilo.start();        
     }//GEN-LAST:event_jb_comenzarMouseClicked
-
+    
     private boolean numeroRepetido(int n){
         AdministrarAuto aa = new AdministrarAuto(path);
         aa.cargarArchivo();
@@ -327,7 +346,6 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_agregar;
     private javax.swing.JButton jb_color;
@@ -345,6 +363,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     private javax.swing.JLabel jl_numeroIdentificador2;
     private javax.swing.JLabel jl_numeroIdentificador3;
     private javax.swing.JLabel jl_pista;
+    private javax.swing.JProgressBar jpb_carrera;
     private javax.swing.JTable jt_carrera;
     private javax.swing.JTextField jtf_largo;
     private javax.swing.JTextField jtf_nombreCorredor;
