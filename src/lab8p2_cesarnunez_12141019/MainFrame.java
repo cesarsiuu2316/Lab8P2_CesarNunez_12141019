@@ -18,6 +18,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     Thread hilo = null;
     private boolean hayPista = false;
     private ArrayList<Auto> autos = new ArrayList();
+     AdministrarTabla at;
 
     public JTable getJt_carrera() {
         return jt_carrera;
@@ -84,6 +85,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jb_pausar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jb_pausar.setText("Pausar");
+        jb_pausar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_pausarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jb_pausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 170, 40));
 
         jl_largo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -291,12 +297,16 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     }
     
     private void jb_comenzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_comenzarMouseClicked
-        AdministrarTabla at = new AdministrarTabla(jt_carrera, jpb_carrera);
+        at = new AdministrarTabla(jt_carrera, jpb_carrera);
         hilo = new Thread(at);
         at.setAutos(autos);
         at.getBarra().setValue(0);
         hilo.start();        
     }//GEN-LAST:event_jb_comenzarMouseClicked
+
+    private void jb_pausarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_pausarMouseClicked
+        at.setAvanzar(false);
+    }//GEN-LAST:event_jb_pausarMouseClicked
     
     private boolean numeroRepetido(int n){
         AdministrarAuto aa = new AdministrarAuto(path);
