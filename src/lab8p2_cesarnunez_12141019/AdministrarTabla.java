@@ -80,13 +80,16 @@ public class AdministrarTabla implements Runnable{
                             break;
                         }
                     }
-                }     
-                imprimir();    
+                }        
                 refrescarBarra();
-                if(barra.getValue() >= largo){
-                    iniciar = false;
-                }  
-                
+                ordenarTable();
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    DefaultTableModel m = (DefaultTableModel) table.getModel();
+                    if((Integer) m.getValueAt(i, 2) > largo){
+                        iniciar = false;
+                    }
+                }
+            
                 try{
                     Thread.sleep(1000);
                 }catch(Exception e){
@@ -116,17 +119,16 @@ public class AdministrarTabla implements Runnable{
         }
     }
     
-    private void ordenarLista(){
-        ArrayList<Integer> a = new ArrayList();
-        //int[] dist = new int[autos.size()]; 
-        for (int i = 0; i < autos.size(); i++) {
-            //dist[i] = autos.get(i).getDistanciaRecorrida();  
-            a.add(autos.get(i).getDistanciaRecorrida());
-        }
-        Collections.sort(a);
-
-        for (int i = 0; i < a.size(); i++) {
-            
+    private void ordenarTable(){
+        for (int i = 0; i < autos.size() - 1; i++) {
+            for (int j = i + 1; j < autos.size(); j++) {
+                DefaultTableModel m = (DefaultTableModel) table.getModel();
+                int dist1 = (Integer) m.getValueAt(i, 2);
+                int dist2 = (Integer) m.getValueAt(j, 2);
+                if(dist2 > dist1){
+                    m.moveRow(j, j, i);                    
+                }
+            }
         }
     }
     
