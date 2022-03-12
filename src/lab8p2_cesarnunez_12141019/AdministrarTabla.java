@@ -88,12 +88,11 @@ public class AdministrarTabla implements Runnable{
                     if((Integer) m.getValueAt(i, 2) > largo){
                         iniciar = false;
                     }
-                }
-            
-                try{
-                    Thread.sleep(1000);
-                }catch(Exception e){
-                }
+                }           
+            }
+            try{
+                Thread.sleep(1000);
+            }catch(Exception e){
             }
         }
     }
@@ -108,9 +107,7 @@ public class AdministrarTabla implements Runnable{
         if(table.getSelectedRow() >= 0){            
             DefaultTableModel m = (DefaultTableModel) table.getModel();
             int dist = (Integer) m.getValueAt(table.getSelectedRow(), 2);
-            System.out.println("dist: " + dist);
-            barra.setValue(dist);
-            
+            barra.setValue(dist);            
             for (Auto auto : autos) {
                 if(auto.getDistanciaRecorrida() == dist){
                     barra.setForeground(auto.getColor());
@@ -126,7 +123,7 @@ public class AdministrarTabla implements Runnable{
                 int dist1 = (Integer) m.getValueAt(i, 2);
                 int dist2 = (Integer) m.getValueAt(j, 2);
                 if(dist2 > dist1){
-                    m.moveRow(j, j, i);                    
+                    m.moveRow(j, j, i);     
                 }
             }
         }

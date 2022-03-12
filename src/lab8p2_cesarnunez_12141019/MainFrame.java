@@ -305,7 +305,13 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_jb_comenzarMouseClicked
 
     private void jb_pausarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_pausarMouseClicked
-        at.setAvanzar(false);
+        if(jb_pausar.getText().equalsIgnoreCase("Pausar")){            
+            jb_pausar.setText("Reanudar");
+            at.setAvanzar(false);
+        }else if(jb_pausar.getText().equalsIgnoreCase("Reanudar")){            
+            jb_pausar.setText("Pausar");
+            at.setAvanzar(true);
+        }        
     }//GEN-LAST:event_jb_pausarMouseClicked
     
     private boolean numeroRepetido(int n){
