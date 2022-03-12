@@ -187,6 +187,11 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
         jb_reiniciar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jb_reiniciar.setText("Reiniciar");
+        jb_reiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_reiniciarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jb_reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, 220, 40));
 
         jtf_nombrePista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -313,6 +318,23 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
             at.setAvanzar(true);
         }        
     }//GEN-LAST:event_jb_pausarMouseClicked
+
+    private void jb_reiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_reiniciarMouseClicked
+        jt_carrera.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jt_carrera.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador", "Corredor", "Distancia"
+            }
+        ));
+        jt_carrera.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setViewportView(jt_carrera);
+        jpb_carrera.setValue(0);
+        at = new AdministrarTabla(jt_carrera, jpb_carrera);
+        hilo = new Thread(at);
+    }//GEN-LAST:event_jb_reiniciarMouseClicked
     
     private boolean numeroRepetido(int n){
         AdministrarAuto aa = new AdministrarAuto(path);
