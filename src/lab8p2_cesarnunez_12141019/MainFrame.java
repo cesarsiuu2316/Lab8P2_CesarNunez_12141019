@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -14,9 +15,13 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
 
     private Color color = Color.red;
     private String path = "./listaAutos.auto";
-    Thread hilo;
+    Thread hilo = null;
     private boolean hayPista = false;
     private ArrayList<Auto> autos = new ArrayList();
+
+    public JTable getJt_carrera() {
+        return jt_carrera;
+    }    
     
     public MainFrame() {
         initComponents();
@@ -88,6 +93,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
         jl_pista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jl_pista.setText("Pista: ______");
         getContentPane().add(jl_pista, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, -1, -1));
+
+        jpb_carrera.setBackground(new java.awt.Color(255, 255, 255));
+        jpb_carrera.setOpaque(true);
         getContentPane().add(jpb_carrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 880, 90));
 
         jt_carrera.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -99,6 +107,7 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
                 "Identificador", "Corredor", "Distancia"
             }
         ));
+        jt_carrera.setSelectionBackground(new java.awt.Color(153, 153, 153));
         jScrollPane1.setViewportView(jt_carrera);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 880, 240));
@@ -282,8 +291,9 @@ public class MainFrame extends javax.swing.JFrame implements Serializable{
     }
     
     private void jb_comenzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_comenzarMouseClicked
-        AdministrarTabla at = new AdministrarTabla(jt_carrera, jpb_carrera, autos);
+        AdministrarTabla at = new AdministrarTabla(jt_carrera, jpb_carrera);
         hilo = new Thread(at);
+        at.setAutos(autos);
         at.getBarra().setValue(0);
         hilo.start();        
     }//GEN-LAST:event_jb_comenzarMouseClicked
